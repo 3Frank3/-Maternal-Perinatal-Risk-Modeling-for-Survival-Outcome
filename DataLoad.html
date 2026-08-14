@@ -1,0 +1,1773 @@
+<html>
+<meta charset="UTF-8">
+<style>
+body { 
+font-family: 'Lato', sans-serif !important;
+font-size: 14px!important;
+color: #353535;
+background-color: #f0f1f2;
+background: #f0f1f2;
+}
+</style>
+<title>
+Program Summary - DataLoad.sas
+</title>
+<body>
+<center>
+<h3>
+Program Summary - DataLoad.sas</center>
+<p><hr>
+<h3>Execution Environment</h3>
+<table border=0>
+<tr><td nowrap>Author:</td><td nowrap>u64352394</td></tr><tr><td nowrap>File:</td><td nowrap>/home/u64352394/BIOSTAT203A/Midterm_Project/DataLoad.sas</td></tr><tr><td nowrap>SAS Platform:</td><td nowrap>Linux LIN X64 5.14.0-284.30.1.el9_2.x86_64</td></tr><tr><td nowrap>SAS Host:</td><td nowrap>ODAWS01-USW2.ODA.SAS.COM</td></tr><tr><td nowrap>SAS Version:</td><td nowrap>9.04.01M8P02222023</td></tr><tr><td nowrap>SAS Locale:</td><td nowrap>en_US</td></tr><tr><td nowrap>Submission Time:</td><td nowrap>10/21/2025, 10:52:34 PM</td></tr><tr><td nowrap>Browser Host:</td><td nowrap>75.85.165.118</td></tr><tr><td nowrap>User Agent:</td><td>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36</td></tr><tr><td nowrap>Application Server:</td><td nowrap>ODAMID00-USW2.ODA.SAS.COM</td></tr>
+</table>
+</h3></center>
+<p><hr></hr>
+<link media="all" rel="stylesheet" href="https://odamid-usw2.oda.sas.com/SASStudio/proxy/308201.9.0.20250319144100_f0dms382p/resources/js/studio/themes/corporate/sce.css" /><div>
+<h3>Code: DataLoad.sas</h3>
+<div style="width: 1129.45px; height: 1331.67px;"><div tabindex="-1" role="application" class="textview sce sce-sas _textviewDOMReady" style="position: relative; overflow: hidden; width: 100%; height: 100%; text-size-adjust: 100%; line-height: normal;"><div class="textviewLeftRuler" tabindex="-1" aria-hidden="true" style="overflow: hidden; user-select: none; position: absolute; top: 0px; bottom: 0px; cursor: default; display: none;"></div><div class="textviewScroll" tabindex="-1" style="position: absolute; inset: 0px; border-width: 0px; margin: 0px; outline: none; background: transparent; overflow: hidden;"><div style="margin: 0px; border-width: 0px; padding: 0px; height: 1306.67px; width: 1126px;"></div></div><div class="textviewRightRuler" tabindex="-1" aria-hidden="true" style="overflow: hidden; user-select: none; position: absolute; top: 0px; bottom: 0px; cursor: default; display: none; right: 0px;"></div><div class="textviewInnerRightRuler" tabindex="-1" aria-hidden="true" style="overflow: hidden; user-select: none; position: absolute; top: 0px; bottom: 0px; cursor: default; display: none; z-index: 1; right: 0px;"></div><div class="textviewMarginRuler" tabindex="-1" aria-hidden="true" style="overflow: hidden; user-select: none; position: absolute; top: 0px; bottom: 0px; cursor: default; display: none; z-index: 4; left: 2px;"></div><div style="position: absolute; overflow: hidden; margin: 0px; border-width: 0px; padding: 0px; background: transparent; inset: 0px -1px 4px 0px;"><div style="position: absolute; height: 1px; top: -1000px; background: transparent; width: 1126px;"></div><div class="textviewContent" tabindex="0" spellcheck="false" contenteditable="true" style="position: absolute; border-width: 0px; margin: 0px; padding: 0px; outline: none; z-index: 1; user-select: text; white-space: pre; overflow-wrap: normal; tab-size: 4; left: 2px; top: 4px; width: 1126px; height: 1324px;"><div><span class="keyword">libname</span><span class="text"> MIDTERM </span><span class="string">"/home/u64352394/BIOSTAT203A/Midterm_Project"</span><span class="sep">;</span><span> </span></div><div><span class="sec-keyword">run</span><span class="sep">;</span><span> </span></div><div><span> </span></div><div><span class="comment">/* we do not utilize PROC IMPORT since the file isn't delimited but fix-width </span><span> </span></div><div><span class="comment">PROC IMPORT OUT= MIDTERM.origin</span><span> </span></div><div><span class="comment">			DATAFILE= "/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt"</span><span> </span></div><div><span class="comment">RUN; */</span><span> </span></div><div><span> </span></div><div><span> </span></div><div class=" block-mark"><span class="sec-keyword">DATA</span><span class="text"> MIDTERM.origin </span><span class="sep">(</span><span class="keyword">label</span><span class="sep">=</span><span class="string">"Cleaned Matched Multiple Birth and Fetal Death Data"</span><span class="sep">);</span><span> </span></div><div><span class="text">    </span><span class="keyword">INFILE</span><span class="text"> </span><span class="string">'/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt'</span><span class="text"> </span><span class="keyword">lrecl</span><span class="sep">=</span><span class="numeric">157</span><span class="text"> </span><span class="keyword">truncover</span><span class="sep">;</span><span> </span></div><div><span class="text">    </span><span class="keyword">input</span><span> </span></div><div><span class="text">        </span><span class="comment">/* Basic identification variables */</span><span> </span></div><div><span class="text">        PLURAL      </span><span class="numeric">1</span><span class="text">                  </span><span class="comment">/* 2=Twin, 3=Triplet, 4=Quadruplet */</span><span> </span></div><div><span class="text">        MULTID      </span><span class="numeric">2</span><span class="sep">-</span><span class="numeric">7</span><span class="text">                </span><span class="comment">/* Unique ID for the set */</span><span> </span></div><div><span class="text">        COUNT       </span><span class="numeric">8</span><span class="text">                  </span><span class="comment">/* Number of matched records in set */</span><span> </span></div><div><span class="text">        COMPLETE    </span><span class="numeric">9</span><span class="text">                  </span><span class="comment">/* 1=Complete set, 2=Incomplete set */</span><span> </span></div><div><span> </span></div><div><span> </span></div><div><span class="text">        </span><span class="comment">/* Outcome flags */</span><span> </span></div><div><span class="text">        BIRTH       </span><span class="numeric">10</span><span class="text">                 </span><span class="comment">/* 1=Live birth */</span><span> </span></div><div><span class="text">        DEATH       </span><span class="numeric">11</span><span class="text">                 </span><span class="comment">/* 1=Infant death */</span><span> </span></div><div><span class="text">        FETAL       </span><span class="numeric">12</span><span class="text">                 </span><span class="comment">/* 1=Fetal death */</span><span> </span></div><div><span class="text">        BIRTHID     </span><span class="numeric">13</span><span class="text">                 </span><span class="comment">/* 1=Survivor, 2=Infant death, 3=Fetal death */</span><span> </span></div><div><span> </span></div><div><span> </span></div><div><span class="text">        </span><span class="comment">/* Maternal characteristics */</span><span> </span></div><div><span class="text">        MAGER       </span><span class="numeric">15</span><span class="sep">-</span><span class="numeric">16</span><span class="text">              </span><span class="comment">/* Maternal age (years) */</span><span> </span></div><div><span class="text">        MAGER9      </span><span class="numeric">17</span><span class="text">                 </span><span class="comment">/* Maternal age group (1–9) */</span><span> </span></div><div><span class="text">        MRACEHISP   </span><span class="numeric">20</span><span class="text">                 </span><span class="comment">/* Maternal race/Hispanic origin */</span><span> </span></div><div><span class="text">        MEDUC       </span><span class="numeric">24</span><span class="text">                 </span><span class="comment">/* Maternal education */</span><span> </span></div><div><span class="text">        BMI_R       </span><span class="numeric">56</span><span class="text">                 </span><span class="comment">/* BMI category (1–6) */</span><span> </span></div><div><span class="text">        PRECARE5    </span><span class="numeric">39</span><span class="text">                 </span><span class="comment">/* Prenatal care start month group */</span><span> </span></div><div><span class="text">        CIG_R       </span><span class="sep">$</span><span class="numeric">55</span><span class="text">                </span><span class="comment">/* Smoked during pregnancy (Y/N/U) */</span><span> </span></div><div><span class="text">        RF_GDIAB    </span><span class="sep">$</span><span class="numeric">59</span><span class="text">                </span><span class="comment">/* Gestational diabetes (Y/N/U) */</span><span> </span></div><div><span class="text">        RF_GHYPE    </span><span class="sep">$</span><span class="numeric">61</span><span class="text">                </span><span class="comment">/* Gestational hypertension (Y/N/U) */</span><span> </span></div><div><span class="text">        RF_PPTERM   </span><span class="sep">$</span><span class="numeric">62</span><span class="text">                </span><span class="comment">/* Previous preterm birth (Y/N/U) */</span><span> </span></div><div><span> </span></div><div><span> </span></div><div><span class="text">        </span><span class="comment">/* Infant characteristics */</span><span> </span></div><div><span class="text">        SEX         </span><span class="sep">$</span><span class="numeric">104</span><span class="text">               </span><span class="comment">/* M/F */</span><span> </span></div><div><span class="text">        OEGEST      </span><span class="numeric">106</span><span class="sep">-</span><span class="numeric">107</span><span class="text">            </span><span class="comment">/* Gestational weeks (17–47) */</span><span> </span></div><div><span class="text">        BWTR12      </span><span class="numeric">114</span><span class="sep">-</span><span class="numeric">115</span><span class="text">            </span><span class="comment">/* Birthweight recode */</span><span> </span></div><div><span class="text">    </span><span class="sep">;</span><span> </span></div><div><span class="sec-keyword">RUN</span><span class="sep">;</span><span> </span></div><div><span> </span></div><div><span> </span></div><div class=" block-mark"><span class="sec-keyword">PROC</span><span class="text"> </span><span class="sec-keyword">FORMAT</span><span class="sep">;</span><span class="text"> </span><span> </span></div><div><span class="text">	</span><span class="keyword">value</span><span class="text"> </span><span> </span></div><div><span class="text">RUN</span><span class="sep">;</span><span> </span></div><div><span> </span></div><div class=" block-mark"><span class="sec-keyword">DATA</span><span class="text"> MIDTERM.formatted</span><span class="sep">;</span><span> </span></div><div><span class="text">    </span><span class="keyword">SET</span><span class="text"> MIDTERM.origin</span><span class="sep">;</span><span> </span></div><div><span class="text">	</span><span class="keyword">LABEL</span><span> </span></div><div><span class="text">		variable </span><span class="sep">=</span><span class="text"> </span><span class="string">"var_name"</span><span> </span></div><div><span class="text">	</span><span class="sep">;</span><span> </span></div><div><span class="text">    </span><span class="keyword">format</span><span> </span></div><div><span class="text">        autopsy </span><span class="format">$CAUTO.</span><span> </span></div><div><span class="text">       </span><span class="sep">;</span><span class="comment">*example;</span><span> </span></div><div><span class="sec-keyword">run</span><span class="sep">;</span><span> </span></div><div><span> </span></div><div><span> </span></div><div><span class="comment">/* Step 3: Verify dataset creation */</span><span> </span></div><div class=" block-mark"><span class="sec-keyword">proc</span><span class="text"> </span><span class="sec-keyword">contents</span><span class="text"> </span><span class="keyword">data</span><span class="text"> </span><span class="sep">=</span><span class="text"> MIDTERM.formatted</span><span class="sep">;</span><span> </span></div><div><span class="sec-keyword">run</span><span class="sep">;</span><span> </span></div><div><span> </span></div><div><span> </span></div><div class=" block-mark"><span class="sec-keyword">proc</span><span class="text"> </span><span class="sec-keyword">print</span><span class="text"> </span><span class="keyword">data</span><span class="text"> </span><span class="sep">=</span><span class="text"> MIDTERM.formatted </span><span class="sep">(</span><span class="keyword">obs</span><span class="sep">=</span><span class="numeric">10</span><span class="sep">);</span><span> </span></div><div><span class="sec-keyword">run</span><span class="sep">;</span><span> </span></div><div><span> </span></div></div><div class="textviewSelectionUnfocused" style="position: absolute; border-width: 0px; margin: 0px; padding: 0px; outline: none; width: 0px; height: 0px; z-index: 0; visibility: visible;"></div><div class="textviewSelectionUnfocused" style="position: absolute; border-width: 0px; margin: 0px; padding: 0px; outline: none; width: 0px; height: 0px; z-index: 0;"></div><div class="textviewSelectionUnfocused" style="position: absolute; border-width: 0px; margin: 0px; padding: 0px; outline: none; width: 0px; height: 0px; z-index: 0;"></div></div></div></div></div>
+<div>
+<hr><h3>Log: DataLoad.sas</h3>
+<style>
+.sasError{color:red}
+.sasMessage{color:#000}
+.sasWarning{color:#008000}
+.sasSource{color:#000}
+.sasNote{color:#00f}
+</style><p>Notes (16)</p>
+<div {'style':display:none;height:0px'}="" charset="UTF-8"></div><div {'style':display:none;height:0px'}="" rel="stylesheet" href="./log.css"></div><style rel="stylesheet">.sasError {color: red;}.sasMessage{color:#000000;}.sasWarning{color:green;}.sasSource{color:#000000;}.sasNote {color:blue;}</style><div {'style':display:none;height:0px'}log:dataload.sas<="" div=""><pre class="sasLog" id="pre_sasLog_213394" style="background-color:transparent; -webkit-user-select: text; -webkit-user-modify: read-only;-webkit-touch-callout: default;border-top-width: 0px;border-bottom-width: 0px"><div><div class="sasSource"> </div><div class="sasSource"> 1          OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;</div><div class="sasSource"> 68         </div><div class="sasSource"> 69         libname MIDTERM "/home/u64352394/BIOSTAT203A/Midterm_Project";</div><div class="sasNote" id="sasLogNote1_1761112353058"> NOTE: Libref MIDTERM was successfully assigned as follows: </div><div class="sasNote">       Engine:        V9 </div><div class="sasNote">       Physical Name: /home/u64352394/BIOSTAT203A/Midterm_Project</div><div class="sasSource"> 70         run;</div><div class="sasSource"> 71         </div><div class="sasSource"> 72         /* we do not utilize PROC IMPORT since the file isn't delimited but fix-width</div><div class="sasSource"> 73         PROC IMPORT OUT= MIDTERM.origin</div><div class="sasSource"> 74         DATAFILE= "/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt"</div><div class="sasSource"> 75         RUN; */</div><div class="sasSource"> 76         </div><div class="sasSource"> 77         </div><div class="sasSource"> 78         DATA MIDTERM.origin (label="Cleaned Matched Multiple Birth and Fetal Death Data");</div><div class="sasSource"> 79             INFILE '/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt' lrecl=157</div><div class="sasSource"> 79       ! truncover;</div><div class="sasSource"> 80             input</div><div class="sasSource"> 81                 /* Basic identification variables */</div><div class="sasSource"> 82                 PLURAL      1                  /* 2=Twin, 3=Triplet, 4=Quadruplet */</div><div class="sasSource"> 83                 MULTID      2-7                /* Unique ID for the set */</div><div class="sasSource"> 84                 COUNT       8                  /* Number of matched records in set */</div><div class="sasSource"> 85                 COMPLETE    9                  /* 1=Complete set, 2=Incomplete set */</div><div class="sasSource"> 86         </div><div class="sasSource"> 87         </div><div class="sasSource"> 88                 /* Outcome flags */</div><div class="sasSource"> 89                 BIRTH       10                 /* 1=Live birth */</div><div class="sasSource"> 90                 DEATH       11                 /* 1=Infant death */</div><div class="sasSource"> 91                 FETAL       12                 /* 1=Fetal death */</div><div class="sasSource"> 92                 BIRTHID     13                 /* 1=Survivor, 2=Infant death, 3=Fetal death */</div><div class="sasSource"> 93         </div><div class="sasSource"> 94         </div><div class="sasSource"> 95                 /* Maternal characteristics */</div><div class="sasSource"> 96                 MAGER       15-16              /* Maternal age (years) */</div><div class="sasSource"> 97                 MAGER9      17                 /* Maternal age group (1–9) */</div><div class="sasSource"> 98                 MRACEHISP   20                 /* Maternal race/Hispanic origin */</div><div class="sasSource"> 99                 MEDUC       24                 /* Maternal education */</div><div class="sasSource"> 100                BMI_R       56                 /* BMI category (1–6) */</div><div class="sasSource"> 101                PRECARE5    39                 /* Prenatal care start month group */</div><div class="sasSource"> 102                CIG_R       $55                /* Smoked during pregnancy (Y/N/U) */</div><div class="sasSource"> 103                RF_GDIAB    $59                /* Gestational diabetes (Y/N/U) */</div><div class="sasSource"> 104                RF_GHYPE    $61                /* Gestational hypertension (Y/N/U) */</div><div class="sasSource"> 105                RF_PPTERM   $62                /* Previous preterm birth (Y/N/U) */</div><div class="sasSource"> 106        </div><div class="sasSource"> 107        </div><div class="sasSource"> 108                /* Infant characteristics */</div><div class="sasSource"> 109                SEX         $104               /* M/F */</div><div class="sasSource"> 110                OEGEST      106-107            /* Gestational weeks (17–47) */</div><div class="sasSource"> 111                BWTR12      114-115            /* Birthweight recode */</div><div class="sasSource"> 112            ;</div><div class="sasSource"> 113        RUN;</div><div class="sasNote"> </div><div class="sasNote" id="sasLogNote2_1761112353058"> NOTE: The infile '/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt' is:</div><div class="sasNote">       Filename=/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt,</div><div class="sasNote">       Owner Name=u64352394,Group Name=oda,</div><div class="sasNote">       Access Permission=-rw-r--r--,</div><div class="sasNote">       Last Modified=21Oct2025:19:16:22,</div><div class="sasNote">       File Size (bytes)=100793691</div><div class="sasNote"> </div><div class="sasNote" id="sasLogNote3_1761112353058"> NOTE: 641934 records were read from the infile </div><div class="sasNote">       '/home/u64352394/BIOSTAT203A/Midterm_Project/matched-multiple-birth-fetal-death-2016-2020.txt'.</div><div class="sasNote">       The minimum record length was 155.</div><div class="sasNote">       The maximum record length was 157.</div><div class="sasNote" id="sasLogNote4_1761112353058"> NOTE: The data set MIDTERM.ORIGIN has 641934 observations and 21 variables.</div></div><div><div class="sasNote" id="sasLogNote5_1761112353058"> NOTE: DATA statement used (Total process time):</div><div class="sasNote">       real time           0.55 seconds</div><div class="sasNote">       user cpu time       0.27 seconds</div><div class="sasNote">       system cpu time     0.10 seconds</div><div class="sasNote">       memory              2063.09k</div><div class="sasNote">       OS Memory           22436.00k</div><div class="sasNote">       Timestamp           10/22/2025 05:52:33 AM</div><div class="sasNote">       Step Count                        24  Switch Count  1</div><div class="sasNote">       Page Faults                       0</div><div class="sasNote">       Page Reclaims                     372</div><div class="sasNote">       Page Swaps                        0</div><div class="sasNote">       Voluntary Context Switches        2582</div><div class="sasNote">       Involuntary Context Switches      3</div><div class="sasNote">       Block Input Operations            0</div><div class="sasNote">       Block Output Operations           171024</div><div class="sasNote">       </div><div class="sasNote"> </div><div class="sasSource"> 114        </div><div class="sasSource"> 115        </div><div class="sasSource"> 116        PROC FORMAT;</div><div class="sasSource"> 117        value</div><div class="sasSource"> 118        RUN;</div><div class="sasNote" id="sasLogNote6_1761112353058"> NOTE: Format RUN has been output.</div><div class="sasSource"> 119        </div><div class="sasNote"> </div><div class="sasNote" id="sasLogNote7_1761112353058"> NOTE: PROCEDURE FORMAT used (Total process time):</div><div class="sasNote">       real time           0.00 seconds</div><div class="sasNote">       user cpu time       0.00 seconds</div><div class="sasNote">       system cpu time     0.00 seconds</div><div class="sasNote">       memory              293.28k</div><div class="sasNote">       OS Memory           21664.00k</div><div class="sasNote">       Timestamp           10/22/2025 05:52:33 AM</div><div class="sasNote">       Step Count                        25  Switch Count  2</div><div class="sasNote">       Page Faults                       0</div><div class="sasNote">       Page Reclaims                     36</div><div class="sasNote">       Page Swaps                        0</div><div class="sasNote">       Voluntary Context Switches        13</div><div class="sasNote">       Involuntary Context Switches      0</div><div class="sasNote">       Block Input Operations            0</div><div class="sasNote">       Block Output Operations           56</div><div class="sasNote">       </div><div class="sasNote"> </div><div class="sasSource"> 120        DATA MIDTERM.formatted;</div><div class="sasSource"> 121            SET MIDTERM.origin;</div><div class="sasSource"> 122        LABEL</div><div class="sasSource"> 123        variable = "var_name"</div><div class="sasSource"> 124        ;</div><div class="sasSource"> 125            format</div><div class="sasSource"> 126                autopsy $CAUTO.</div><div class="sasError">                            _______</div><div class="sasError">                            484</div><div class="sasNote" id="sasLogNote8_1761112353058"> NOTE 484-185: Format $CAUTO was not found or could not be loaded.</div><div class="sasSource"> </div><div class="sasSource"> 127               ;*example;</div><div class="sasSource"> 128        run;</div><div class="sasNote"> </div><div class="sasNote" id="sasLogNote9_1761112353058"> NOTE: Variable variable is uninitialized.</div><div class="sasNote" id="sasLogNote10_1761112353058"> NOTE: Variable autopsy is uninitialized.</div><div class="sasNote" id="sasLogNote11_1761112353058"> NOTE: There were 641934 observations read from the data set MIDTERM.ORIGIN.</div><div class="sasNote" id="sasLogNote12_1761112353058"> NOTE: The data set MIDTERM.FORMATTED has 641934 observations and 22 variables.</div><div class="sasNote" id="sasLogNote13_1761112353058"> NOTE: DATA statement used (Total process time):</div><div class="sasNote">       real time           0.32 seconds</div><div class="sasNote">       user cpu time       0.03 seconds</div><div class="sasNote">       system cpu time     0.12 seconds</div><div class="sasNote">       memory              3566.65k</div><div class="sasNote">       OS Memory           24488.00k</div><div class="sasNote">       Timestamp           10/22/2025 05:52:34 AM</div><div class="sasNote">       Step Count                        26  Switch Count  4</div><div class="sasNote">       Page Faults                       0</div><div class="sasNote">       Page Reclaims                     516</div><div class="sasNote">       Page Swaps                        0</div><div class="sasNote">       Voluntary Context Switches        2838</div><div class="sasNote">       Involuntary Context Switches      10</div><div class="sasNote">       Block Input Operations            0</div><div class="sasNote">       Block Output Operations           181000</div><div class="sasNote">       </div><div class="sasNote"> </div><div class="sasSource"> 129        </div><div class="sasSource"> 130        </div><div class="sasSource"> 131        /* Step 3: Verify dataset creation */</div><div class="sasSource"> 132        proc contents data = MIDTERM.formatted;</div><div class="sasSource"> 133        run;</div><div class="sasNote"> </div><div class="sasNote" id="sasLogNote14_1761112353058"> NOTE: PROCEDURE CONTENTS used (Total process time):</div><div class="sasNote">       real time           0.05 seconds</div><div class="sasNote">       user cpu time       0.04 seconds</div><div class="sasNote">       system cpu time     0.01 seconds</div><div class="sasNote">       memory              3248.46k</div><div class="sasNote">       OS Memory           23976.00k</div><div class="sasNote">       Timestamp           10/22/2025 05:52:34 AM</div><div class="sasNote">       Step Count                        27  Switch Count  0</div><div class="sasNote">       Page Faults                       0</div><div class="sasNote">       Page Reclaims                     583</div><div class="sasNote">       Page Swaps                        0</div><div class="sasNote">       Voluntary Context Switches        11</div><div class="sasNote">       Involuntary Context Switches      3</div><div class="sasNote">       Block Input Operations            0</div><div class="sasNote">       Block Output Operations           32</div><div class="sasNote">       </div></div><div><div class="sasNote"> </div><div class="sasSource"> 134        </div><div class="sasSource"> 135        </div><div class="sasSource"> 136        proc print data = MIDTERM.formatted (obs=10);</div><div class="sasSource"> 137        run;</div><div class="sasNote"> </div><div class="sasNote" id="sasLogNote15_1761112353058"> NOTE: There were 10 observations read from the data set MIDTERM.FORMATTED.</div><div class="sasNote" id="sasLogNote16_1761112353058"> NOTE: PROCEDURE PRINT used (Total process time):</div><div class="sasNote">       real time           0.03 seconds</div><div class="sasNote">       user cpu time       0.03 seconds</div><div class="sasNote">       system cpu time     0.00 seconds</div><div class="sasNote">       memory              2171.40k</div><div class="sasNote">       OS Memory           23972.00k</div><div class="sasNote">       Timestamp           10/22/2025 05:52:34 AM</div><div class="sasNote">       Step Count                        28  Switch Count  0</div><div class="sasNote">       Page Faults                       0</div><div class="sasNote">       Page Reclaims                     296</div><div class="sasNote">       Page Swaps                        0</div><div class="sasNote">       Voluntary Context Switches        6</div><div class="sasNote">       Involuntary Context Switches      2</div><div class="sasNote">       Block Input Operations            0</div><div class="sasNote">       Block Output Operations           16</div><div class="sasNote">       </div><div class="sasNote"> </div><div class="sasSource"> 138        </div><div class="sasSource"> 139        </div><div class="sasSource"> 140        OPTIONS NONOTES NOSTIMER NOSOURCE NOSYNTAXCHECK;</div><div class="sasSource"> 150        </div></div></pre></div></div>
+<p>
+</div>
+<div>
+<hr><h3>Results: DataLoad.sas</h3>
+<div id="div_3822e555-776b-4a00-84f9-6e2ca4cf0c31" class="ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31">
+
+
+<meta charset="utf-8">
+<meta content="SAS 9.4" name="generator">
+<title>Results: DataLoad.sas</title>
+<style>
+/*<![CDATA[*/
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c section > table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c section > pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c div > table,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c div > pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c article > table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c article > pre,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j section > table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j section > pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j div > table,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j div > pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j article > table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j article > pre,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c p.note, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c p.warning, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c p.error, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c p.fatal,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j p.note, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j p.warning, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j p.error, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j p.fatal,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.c > table.layoutcontainer, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body.j > table.layoutcontainer { margin-left: auto; margin-right: auto }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.l table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.l pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.l p.note,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.l p.warning, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.l p.error, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.l p.fatal { margin-left: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.c table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.c pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.c p.note,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.c p.warning, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.c p.error, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.c p.fatal { margin-left: auto; margin-right: auto }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r p.note,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r table, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r pre, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r p.note,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r p.warning, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r p.error, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion.r p.fatal { margin-right: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 article, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 aside, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 details, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 figcaption, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 figure, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 footer, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 header, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 hgroup, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 nav, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 section { display: block }
+html.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 { font-size: 100% }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body { margin: 1em; font-size: 13px; line-height: 1.231 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 sup { position: relative; vertical-align: baseline; bottom: 0.25em; font-size: 0.8em }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 sub { position: relative; vertical-align: baseline; top: 0.25em; font-size: 0.8em }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 ul, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 ol { margin: 1em 0; padding: 0 0 0 40px }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 dd { margin: 0 0 0 40px }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 nav ul, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 img { border: 0; vertical-align: middle }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 svg:not(:root) { overflow: hidden }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 figure { margin: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 table { border-collapse: collapse; border-spacing: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutcontainer { border-collapse: separate; border-spacing: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 p { margin-top: 0; text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 h1.heading1 { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 h2.heading2 { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 h3.heading3 { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 h4.heading4 { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 h5.heading5 { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 h6.heading6 { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 span { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 table { margin-bottom: 1em }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 td, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 th { text-align: left; padding: 3px 6px; vertical-align: top }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 td[class$="fixed"], .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 th[class$="fixed"] { white-space: pre }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 section, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 article { padding-top: 1px; padding-bottom: 8px }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 hr.pagebreak { height: 0px; border: 0; border-bottom: 1px solid #c0c0c0; margin: 1em 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .stacked-value { text-align: left; display: block }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .stacked-cell > .stacked-value, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 td.data > td.data, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 th.data > td.data, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 th.data > th.data, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 td.data > th.data, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 th.header > th.header { border: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .stacked-cell > div.data { border-width: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer { white-space: nowrap; margin-bottom: 1em }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > p { margin: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > p > span { display: inline-block; width: 100%; white-space: normal }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch { display: table }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .toc { display: none }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .proc_note_group, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .proc_title_group { margin-bottom: 1em }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 p.proctitle { margin: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 p.note, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 p.warning, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 p.error, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 p.fatal { display: table }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .notebanner, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .warnbanner, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .errorbanner, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .fatalbanner,
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .notecontent, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .warncontent, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .errorcontent, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .fatalcontent { display: table-cell; padding: 0.5em }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .notebanner, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .warnbanner, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .errorbanner, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .fatalbanner { padding-right: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body > div > ol li { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .beforecaption > h4 { margin-top: 0; margin-bottom: 0 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .c { text-align: center }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .r { text-align: right }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .l { text-align: left }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .j { text-align: justify }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .d { text-align: right }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .b { vertical-align: bottom }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .m { vertical-align: middle }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .t { vertical-align: top }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .accessiblecaption {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 a:active { color: #800080 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .aftercaption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 4pt;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch { border: hidden; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .batch {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: 'SAS Monospace', 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    padding: 7px;
+    }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .beforecaption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .body {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bodydate {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    text-align: right;
+    vertical-align: top;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bycontentfolder {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .byline {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > colgroup > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > colgroup, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > * > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer > tfoot { border: none; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .bylinecontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .caption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .cell, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .container {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contentfolder, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contentitem {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contentproclabel, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contentprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contents {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contentsdate {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .contenttitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .continued {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .data, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .dataemphasis {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .dataemphasisfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .dataempty {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .datafixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .datastrong {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .datastrongfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .date {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .document {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .errorbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .errorcontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .errorcontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .extendedpage {
+    background-color: #fafbfe;
+    border-style: solid;
+    border-width: 1pt;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+    text-align: center;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .fatalbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .fatalcontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .fatalcontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .folderaction {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footer {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footeremphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footeremphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footerempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footerfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footerstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .footerstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .frame {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .graph > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .graph > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .graph > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .graph > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .graph { border: hidden; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .graph {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .header {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headeremphasis {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headeremphasisfixed {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headerempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headerfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headersandfooters {
+    background-color: #edf2f9;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headerstrong {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .headerstrongfixed {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .heading1, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .heading2, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .heading3, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .heading4, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .heading5, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .heading6 { font-family: Arial, Helvetica, sans-serif }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .index {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .indexaction, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .indexitem {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .indexprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .indextitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutcontainer, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .layoutregion {
+    border-width: 0;
+    border-spacing: 30px;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .linecontent {
+    background-color: #fafbfe;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 a:link { color: #0000ff }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list10 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list2 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list3, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list4, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list5, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list6, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list7, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list8, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .list9 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem10 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem2 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem3, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem4, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem5, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem6, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem7, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem8, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .listitem9 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .note {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .notebanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .notecontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .notecontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .output > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .output > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .output > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .output > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .output { border: hidden; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .output {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pageno {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pages {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pagesdate {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pagesitem {
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pagesproclabel, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pagesprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .pagestitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .paragraph {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > colgroup > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > colgroup, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > * > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip > tfoot { border: none; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .parskip {
+    border: none;
+    border-spacing: 0;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+    }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .prepage {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .proctitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .proctitlefixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooter {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooteremphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooteremphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooterempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooterfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooterstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowfooterstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheader {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheaderemphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheaderemphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: italic;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheaderempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheaderfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheaderstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .rowheaderstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter10, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter2, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter3, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter4, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter5, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter6, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter7, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter8, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemfooter9 {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle10, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle2, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle3, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle4, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle5, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle6, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle7, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle8, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systemtitle9 {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > colgroup > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > colgroup, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > * > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer > tfoot { border: none; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .systitleandfootercontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .table > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .table > colgroup > col {
+    border-left: 1px solid #c1c1c1;
+    border-right: 0 solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .table > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .table > * > tr {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 0 solid #c1c1c1;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .table { border: hidden; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .table {
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > colgroup > col, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > colgroup, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > * > tr, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > thead, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > tbody, .ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer > tfoot { border: none; }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titleandnotecontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .titlesandfooters {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .usertext {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 a:visited { color: #800080 }
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .warnbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: bold;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .warncontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: Arial, 'Albany AMT', Helvetica, Helv;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+.ods_3822e555-776b-4a00-84f9-6e2ca4cf0c31 .warncontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: 'Courier New', Courier;
+    font-size: x-small;
+    font-style: normal;
+    font-weight: normal;
+}
+/*]]>*/
+</style>
+
+
+<div id="div_3822e555-776b-4a00-84f9-6e2ca4cf0c31" class="c body">
+<h1 class="body toc">Results: DataLoad.sas</h1>
+<section data-name="Contents" data-sec-type="proc">
+<div id="IDX" class="proc_title_group">
+<p class="c proctitle">The CONTENTS Procedure</p>
+</div>
+<h1 class="contentprocname toc">The Contents Procedure</h1>
+<section>
+<h1 class="contentfolder toc">MIDTERM.FORMATTED</h1>
+<article aria-label="Attributes">
+<h1 class="contentitem toc">Attributes</h1>
+<table class="table" style="border-spacing: 0" aria-label="Attributes">
+<caption aria-label="Attributes"></caption>
+<colgroup><col><col><col><col></colgroup>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">Data Set Name</th>
+<td class="data">MIDTERM.FORMATTED</td>
+<th class="rowheader" scope="row">Observations</th>
+<td class="data">641934</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Member Type</th>
+<td class="data">DATA</td>
+<th class="rowheader" scope="row">Variables</th>
+<td class="data">22</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Engine</th>
+<td class="data">V9</td>
+<th class="rowheader" scope="row">Indexes</th>
+<td class="data">0</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Created</th>
+<td class="data">10/21/2025 22:52:34</td>
+<th class="rowheader" scope="row">Observation Length</th>
+<td class="data">144</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Last Modified</th>
+<td class="data">10/21/2025 22:52:34</td>
+<th class="rowheader" scope="row">Deleted Observations</th>
+<td class="data">0</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Protection</th>
+<td class="data">&nbsp;</td>
+<th class="rowheader" scope="row">Compressed</th>
+<td class="data">NO</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Data Set Type</th>
+<td class="data">&nbsp;</td>
+<th class="rowheader" scope="row">Sorted</th>
+<td class="data">NO</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Label</th>
+<td class="data">&nbsp;</td>
+<th class="rowheader" scope="row">&nbsp;</th>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Data Representation</th>
+<td class="data">SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64</td>
+<th class="rowheader" scope="row">&nbsp;</th>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Encoding</th>
+<td class="data">utf-8  Unicode (UTF-8)</td>
+<th class="rowheader" scope="row">&nbsp;</th>
+<td class="data">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</article>
+<article id="IDX1" aria-label="Engine/Host Information">
+<h1 class="contentitem toc">Engine/Host Information</h1>
+<table class="table" style="border-spacing: 0" aria-label="Engine/Host Information">
+<caption aria-label="Engine/Host Information"></caption>
+<colgroup><col><col></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">Engine/Host Dependent Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="rowheader" scope="row">Data Set Page Size</th>
+<td class="data">131072</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Number of Data Set Pages</th>
+<td class="data">707</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">First Data Page</th>
+<td class="data">1</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Max Obs per Page</th>
+<td class="data">909</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Obs in First Data Page</th>
+<td class="data">877</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Number of Data Set Repairs</th>
+<td class="data">0</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Filename</th>
+<td class="data">/home/u64352394/BIOSTAT203A/Midterm_Project/formatted.sas7bdat</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Release Created</th>
+<td class="data">9.0401M8</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Host Created</th>
+<td class="data">Linux</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Inode Number</th>
+<td class="data">10757216949</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Access Permission</th>
+<td class="data">rw-r--r--</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">Owner Name</th>
+<td class="data">u64352394</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">File Size</th>
+<td class="data">89MB</td>
+</tr>
+<tr>
+<th class="rowheader" scope="row">File Size (bytes)</th>
+<td class="data">92798976</td>
+</tr>
+</tbody>
+</table>
+</article>
+<article id="IDX2" aria-label="Variables">
+<h1 class="contentitem toc">Variables</h1>
+<table class="table" style="border-spacing: 0" aria-label="Variables">
+<caption aria-label="Variables"></caption>
+<colgroup><col></colgroup><colgroup><col><col><col><col></colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">Alphabetic List of Variables and Attributes</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">#</th>
+<th class="b header" scope="col">Variable</th>
+<th class="b header" scope="col">Type</th>
+<th class="r b header" scope="col">Len</th>
+<th class="b header" scope="col">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">5</th>
+<td class="data">BIRTH</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">8</th>
+<td class="data">BIRTHID</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">13</th>
+<td class="data">BMI_R</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">21</th>
+<td class="data">BWTR12</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">15</th>
+<td class="data">CIG_R</td>
+<td class="data">Char</td>
+<td class="r data">1</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">4</th>
+<td class="data">COMPLETE</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">3</th>
+<td class="data">COUNT</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">6</th>
+<td class="data">DEATH</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">7</th>
+<td class="data">FETAL</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">9</th>
+<td class="data">MAGER</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">10</th>
+<td class="data">MAGER9</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">12</th>
+<td class="data">MEDUC</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">11</th>
+<td class="data">MRACEHISP</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">2</th>
+<td class="data">MULTID</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">20</th>
+<td class="data">OEGEST</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">1</th>
+<td class="data">PLURAL</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">14</th>
+<td class="data">PRECARE5</td>
+<td class="data">Num</td>
+<td class="r data">8</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">16</th>
+<td class="data">RF_GDIAB</td>
+<td class="data">Char</td>
+<td class="r data">1</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">17</th>
+<td class="data">RF_GHYPE</td>
+<td class="data">Char</td>
+<td class="r data">1</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">18</th>
+<td class="data">RF_PPTERM</td>
+<td class="data">Char</td>
+<td class="r data">1</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">19</th>
+<td class="data">SEX</td>
+<td class="data">Char</td>
+<td class="r data">1</td>
+<td class="data">&nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">22</th>
+<td class="data">autopsy</td>
+<td class="data">Char</td>
+<td class="r data">8</td>
+<td class="data">$CAUTO.</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+</section>
+<section data-name="Print" data-sec-type="proc">
+<hr class="pagebreak">
+<h1 class="contentprocname toc">The Print Procedure</h1>
+<article id="IDX3" aria-label="Data Set MIDTERM.FORMATTED">
+<h1 class="contentitem toc">Data Set MIDTERM.FORMATTED</h1>
+<table class="table" style="border-spacing: 0" aria-label="Data Set MIDTERM.FORMATTED">
+<caption aria-label="Data Set MIDTERM.FORMATTED"></caption>
+<colgroup><col></colgroup><colgroup><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup>
+<thead>
+<tr>
+<th class="r header" scope="col">Obs</th>
+<th class="r header" scope="col">PLURAL</th>
+<th class="r header" scope="col">MULTID</th>
+<th class="r header" scope="col">COUNT</th>
+<th class="r header" scope="col">COMPLETE</th>
+<th class="r header" scope="col">BIRTH</th>
+<th class="r header" scope="col">DEATH</th>
+<th class="r header" scope="col">FETAL</th>
+<th class="r header" scope="col">BIRTHID</th>
+<th class="r header" scope="col">MAGER</th>
+<th class="r header" scope="col">MAGER9</th>
+<th class="r header" scope="col">MRACEHISP</th>
+<th class="r header" scope="col">MEDUC</th>
+<th class="r header" scope="col">BMI_R</th>
+<th class="r header" scope="col">PRECARE5</th>
+<th class="header" scope="col">CIG_R</th>
+<th class="header" scope="col">RF_GDIAB</th>
+<th class="header" scope="col">RF_GHYPE</th>
+<th class="header" scope="col">RF_PPTERM</th>
+<th class="header" scope="col">SEX</th>
+<th class="r header" scope="col">OEGEST</th>
+<th class="r header" scope="col">BWTR12</th>
+<th class="header" scope="col">autopsy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">1</th>
+<td class="r data">2</td>
+<td class="r data">400001</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">30</td>
+<td class="r data">5</td>
+<td class="r data">1</td>
+<td class="r data">7</td>
+<td class="r data">6</td>
+<td class="r data">1</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">Y</td>
+<td class="data">N</td>
+<td class="data">F</td>
+<td class="r data">35</td>
+<td class="r data">6</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">2</th>
+<td class="r data">2</td>
+<td class="r data">400001</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">30</td>
+<td class="r data">5</td>
+<td class="r data">1</td>
+<td class="r data">7</td>
+<td class="r data">6</td>
+<td class="r data">1</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">Y</td>
+<td class="data">Y</td>
+<td class="data">F</td>
+<td class="r data">35</td>
+<td class="r data">6</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">3</th>
+<td class="r data">2</td>
+<td class="r data">400002</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">29</td>
+<td class="r data">4</td>
+<td class="r data">6</td>
+<td class="r data">3</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="data">Y</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">37</td>
+<td class="r data">5</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">4</th>
+<td class="r data">2</td>
+<td class="r data">400002</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">29</td>
+<td class="r data">4</td>
+<td class="r data">6</td>
+<td class="r data">3</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="data">Y</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">37</td>
+<td class="r data">5</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">5</th>
+<td class="r data">2</td>
+<td class="r data">400003</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">31</td>
+<td class="r data">5</td>
+<td class="r data">2</td>
+<td class="r data">3</td>
+<td class="r data">5</td>
+<td class="r data">2</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">38</td>
+<td class="r data">6</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">6</th>
+<td class="r data">2</td>
+<td class="r data">400003</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">31</td>
+<td class="r data">5</td>
+<td class="r data">2</td>
+<td class="r data">3</td>
+<td class="r data">5</td>
+<td class="r data">2</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">38</td>
+<td class="r data">5</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">7</th>
+<td class="r data">2</td>
+<td class="r data">400004</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">27</td>
+<td class="r data">4</td>
+<td class="r data">3</td>
+<td class="r data">4</td>
+<td class="r data">3</td>
+<td class="r data">1</td>
+<td class="data">U</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">28</td>
+<td class="r data">3</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">8</th>
+<td class="r data">2</td>
+<td class="r data">400004</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">27</td>
+<td class="r data">4</td>
+<td class="r data">3</td>
+<td class="r data">4</td>
+<td class="r data">3</td>
+<td class="r data">1</td>
+<td class="data">U</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">28</td>
+<td class="r data">3</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">9</th>
+<td class="r data">2</td>
+<td class="r data">400005</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">17</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">Y</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">34</td>
+<td class="r data">4</td>
+<td class="data"> &nbsp;</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">10</th>
+<td class="r data">2</td>
+<td class="r data">400005</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="r data">.</td>
+<td class="r data">.</td>
+<td class="r data">1</td>
+<td class="r data">17</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">2</td>
+<td class="r data">1</td>
+<td class="r data">1</td>
+<td class="data">N</td>
+<td class="data">N</td>
+<td class="data">Y</td>
+<td class="data">N</td>
+<td class="data">M</td>
+<td class="r data">34</td>
+<td class="r data">6</td>
+<td class="data"> &nbsp;</td>
+</tr>
+</tbody>
+</table>
+</article>
+</section>
+</div>
+
+
+</div>
+<p>
+</div>
+</body></html>
